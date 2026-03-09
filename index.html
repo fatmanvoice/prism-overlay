@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: transparent; /* 透明背景 */
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4); /* 半透明黑底，確保白字在室外也清晰 */
+            padding: 8px 15px;
+            border-radius: 50px; /* 膠囊形狀 */
+            border: 2px solid #0abab5; /* 蒂芬妮藍邊框 */
+        }
+        #logo {
+            height: 40px; /* Logo 大小 */
+            width: auto;
+            margin-right: 12px;
+            border-radius: 50%;
+        }
+        #clock {
+            color: #0abab5; /* 蒂芬妮藍 */
+            font-size: 24px;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums; /* 防止數字跳動 */
+            text-shadow: 1px 1px 2px #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="logo" src="my_logo.png"> 
+        <div id="clock">00:00:00</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').innerText = `${h}:${m}:${s}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
