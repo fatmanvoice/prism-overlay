@@ -26,37 +26,3 @@
     </script>
 </body>
 </html>
-        #clock {
-            font-size: 18px; /* 時間字級 */
-            font-variant-numeric: tabular-nums; /* 讓數字寬度一致不跳動 */
-        }
-    </style>
-</head>
-<body>
-    <div class="info-container">
-        <img id="logo" src="my_logo.png"> 
-        <div id="date" class="time-text">0000-00-00</div>
-        <div id="clock" class="time-text">00:00:00</div>
-    </div>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            
-            // 格式化日期：年/月/日
-            const y = now.getFullYear();
-            const mo = String(now.getMonth() + 1).padStart(2, '0');
-            const d = String(now.getDate()).padStart(2, '0');
-            document.getElementById('date').innerText = `${y}/${mo}/${d}`;
-
-            // 格式化時間：24小時制
-            const h = String(now.getHours()).padStart(2, '0');
-            const mi = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').innerText = `${h}:${mi}:${s}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
-</body>
-</html>
