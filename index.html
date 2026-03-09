@@ -4,42 +4,56 @@
     <meta charset="UTF-8">
     <style>
         body { 
-            margin: 0; padding: 10px; 
-            font-family: "Arial Black", Gadget, sans-serif; 
-            color: #0abab5; 
-            line-height: 1.2; 
+            margin: 0;           /* 移除網頁邊框空白 */
+            padding: 0;          /* 移除內部填充空白 */
+            font-family: "Arial Black", Gadget, sans-serif; /* 使用極粗字體 */
+            color: #0abab5;      /* 設定文字顏色為蒂芬妮藍綠色 */
+            line-height: 1.0;    /* 將行高設為最小(1.0)，讓文字緊湊排列 */
         }
-        /* Logo 放大設定 */
+        
         #logo { 
-            height: 60px; /* 從 35px 放大到 60px */
-            width: auto; 
-            margin-bottom: 8px; 
-            display: block; 
+            height: 60px;        /* Logo 的高度 */
+            width: auto;         /* 寬度依比例自動調整 */
+            margin-bottom: 0px;  /* 將圖片下方的間距設為 0 */
+            display: block;      /* 確保圖片獨佔一行 */
         }
         
         .text-style {
+            /* 白色描邊設定：4px 厚度，確保在深色背景也清晰 */
             -webkit-text-stroke: 4px white; 
+            /* 關鍵：先畫邊框再填色，防止字體被邊框吃掉變細 */
             paint-order: stroke fill; 
-            display: block;
+            display: block;      /* 確保每一段文字都換行 */
+            margin-top: -2px;    /* 使用負數邊距，讓文字與上方更緊貼 */
         }
         
-        /* 配合 Logo 放大，文字也稍微調大一點點 */
-        #date { font-size: 16px; }
-        #clock { font-size: 24px; font-variant-numeric: tabular-nums; }
+        #date { font-size: 16px; }  /* 日期字體大小 */
+        #clock { font-size: 24px; font-variant-numeric: tabular-nums; } /* 時間字體與等寬數字設定 */
     </style>
 </head>
 <body>
     <img id="logo" src="my_logo.png">
+    
     <div id="date" class="text-style"></div>
+    
     <div id="clock" class="text-style"></div>
 
     <script>
+        // 補零功能：例如 9月 會變成 09
         const pad = n => String(n).padStart(2, '0');
+        
+        // 設定星期幾的英文縮寫陣列
         const days = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
+        
+        // 每秒執行一次更新功能
         setInterval(() => {
-            const d = new Date();
+            const d = new Date(); // 取得現在時間
+            
+            // 組合日期格式：2026/03/09 Mon.
             const dateStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${days[d.getDay()]}`;
             document.getElementById('date').innerText = dateStr;
+            
+            // 取得 24 小時制時間：18:15:45
             document.getElementById('clock').innerText = d.toLocaleTimeString('zh-TW', {hour12:false});
         }, 1000);
     </script>
