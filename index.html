@@ -5,50 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background: transparent; /* 透明背景 */
+            background: transparent; /* 確保背景透明 */
             margin: 0;
             padding: 10px;
             display: flex;
-            align-items: center;
+            flex-direction: column; /* 改為垂直排列 */
+            align-items: flex-start; /* 靠左對齊 */
             font-family: sans-serif;
             overflow: hidden;
         }
-        .container {
+        .info-container {
             display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.4); /* 半透明黑底，確保白字在室外也清晰 */
-            padding: 8px 15px;
-            border-radius: 50px; /* 膠囊形狀 */
-            border: 2px solid #0abab5; /* 蒂芬妮藍邊框 */
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 5px;
         }
         #logo {
-            height: 40px; /* Logo 大小 */
+            height: 45px; /* 您可依需求微調 Logo 高度 */
             width: auto;
-            margin-right: 12px;
-            border-radius: 50%;
+            margin-bottom: 8px; /* 圖片與文字間的間距 */
+        }
+        .time-text {
+            color: #0abab5; /* 您喜愛的蒂芬妮藍綠色 */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* 確保在亮背景下清晰 */
+            line-height: 1.2;
+        }
+        #date {
+            font-size: 18px; /* 日期字級 */
         }
         #clock {
-            color: #0abab5; /* 蒂芬妮藍 */
-            font-size: 24px;
-            font-weight: bold;
-            font-variant-numeric: tabular-nums; /* 防止數字跳動 */
-            text-shadow: 1px 1px 2px #000;
+            font-size: 28px; /* 時間字級 */
+            font-variant-numeric: tabular-nums; /* 讓數字寬度一致不跳動 */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img id="logo" src="my_logo.png"> 
-        <div id="clock">00:00:00</div>
+    <div class="info-container">
+        <img id="logo" src="logo.png"> 
+        <div id="date" class="time-text">0000-00-00</div>
+        <div id="clock" class="time-text">00:00:00</div>
     </div>
 
     <script>
         function updateClock() {
             const now = new Date();
+            
+            // 格式化日期：年-月-日
+            const y = now.getFullYear();
+            const mo = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            document.getElementById('date').innerText = `${y}-${mo}-${d}`;
+
+            // 格式化時間：24小時制
             const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
+            const mi = String(now.getMinutes()).padStart(2, '0');
             const s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').innerText = `${h}:${m}:${s}`;
+            document.getElementById('clock').innerText = `${h}:${mi}:${s}`;
         }
         setInterval(updateClock, 1000);
         updateClock();
