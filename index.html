@@ -2,12 +2,14 @@
 <html style="background:transparent;overflow:hidden">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
     <style>
         body { 
             margin: 0;           /* 移除網頁邊距 */
             padding: 0;          /* 移除內容內縮 */
-            font-family: Impact, "Arial Black", Gadget, sans-serif; /* 使用最粗的字體 */
-            color: #008b8b;      /* 設定文字顏色為蒂芬妮藍綠色 */
+            /* 優先使用雲端胖字體 'Black Han Sans' */
+            font-family: 'Black Han Sans', Impact, "Arial Black", sans-serif; 
+            color: #008b8b;      /* 您目前設定的深藍綠色 */
             line-height: 1.0;    /* 壓縮行高，讓文字更緊湊 */
             
             /* 置中關鍵設定：使用 Flex 佈局讓內容垂直排列並水平置中 */
@@ -18,9 +20,9 @@
         }
         
         #logo { 
-            height: 70px;        /* Logo 顯示高度 */
+            height: 70px;        /* 您目前設定的 Logo 高度 */
             width: auto;         /* 寬度依比例縮放 */
-            margin-bottom: 2px;  /* 圖片下方的間距設為最小 */
+            margin-bottom: 2px;  /* 圖片下方的間距 */
             display: block;      /* 讓圖片獨立占據一行 */
         }
         
@@ -30,12 +32,12 @@
             /* 關鍵：先畫描邊再填充顏色，防止字體被邊框吃掉變細 */
             paint-order: stroke fill; 
             display: block;      /* 確保每一行文字自動換行 */
-            margin-top: 0px;    /* 使用負數邊距，強制讓文字往上貼近 Logo */
+            margin-top: 0px;     /* 文字與上方的間距 */
             width: fit-content;  /* 寬度根據內容自動調整，有利於置中 */
         }
         
-        #date { font-size: 20px; }  /* 日期字體大小設定 */
-        #clock { font-size: 30px; font-variant-numeric: tabular-nums; } /* 時間大小與等寬數字設定 */
+        #date { font-size: 20px; }  /* 您目前設定的日期大小 */
+        #clock { font-size: 30px; font-variant-numeric: tabular-nums; } /* 您目前設定的時間大小 */
     </style>
 </head>
 <body>
@@ -46,15 +48,15 @@
     <div id="clock" class="text-style"></div>
 
     <script>
-        // 數字補零工具函數，例如 3 會變成 "03"
+        // 數字補零工具函數
         const pad = n => String(n).padStart(2, '0');
         
         // 定義星期幾的英文縮寫陣列
         const days = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
         
-        // 設定每 1000 毫秒 (1秒) 更新一次畫面
+        // 設定每 1秒 更新一次畫面
         setInterval(() => {
-            const d = new Date(); // 取得目前的系統時間
+            const d = new Date(); // 取得系統時間
             
             // 組合日期格式：2026/03/09 Mon.
             const dateStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${days[d.getDay()]}`;
