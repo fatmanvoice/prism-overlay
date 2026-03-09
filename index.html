@@ -3,30 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        body { margin: 0; padding: 5px; font-family: "Arial Black", sans-serif; color: #0abab5; line-height: 1.1; }
-        #logo { height: 35px; margin-bottom: 4px; display: block; }
-        /* 修正描邊：使用兩層文字疊加效果，確保顏色不被吃掉 */
-        .outline {
-            position: relative;
-            display: inline-block;
-            -webkit-text-stroke: 4px white; /* 稍微加粗邊線 */
-            paint-order: stroke fill;
+        body { 
+            margin: 0; padding: 10px; 
+            font-family: "Arial Black", Gadget, sans-serif; 
+            color: #0abab5; 
+            line-height: 1.2; 
         }
-        #date { font-size: 14px; }
-        #clock { font-size: 20px; font-variant-numeric: tabular-nums; }
+        /* Logo 放大設定 */
+        #logo { 
+            height: 60px; /* 從 35px 放大到 60px */
+            width: auto; 
+            margin-bottom: 8px; 
+            display: block; 
+        }
+        
+        .text-style {
+            -webkit-text-stroke: 4px white; 
+            paint-order: stroke fill; 
+            display: block;
+        }
+        
+        /* 配合 Logo 放大，文字也稍微調大一點點 */
+        #date { font-size: 16px; }
+        #clock { font-size: 24px; font-variant-numeric: tabular-nums; }
     </style>
 </head>
 <body>
     <img id="logo" src="my_logo.png">
-    <div id="date" class="outline"></div><br>
-    <div id="clock" class="outline"></div>
+    <div id="date" class="text-style"></div>
+    <div id="clock" class="text-style"></div>
 
     <script>
         const pad = n => String(n).padStart(2, '0');
         const days = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
         setInterval(() => {
             const d = new Date();
-            document.getElementById('date').innerText = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${days[d.getDay()]}`;
+            const dateStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${days[d.getDay()]}`;
+            document.getElementById('date').innerText = dateStr;
             document.getElementById('clock').innerText = d.toLocaleTimeString('zh-TW', {hour12:false});
         }, 1000);
     </script>
