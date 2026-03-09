@@ -4,31 +4,38 @@
     <meta charset="UTF-8">
     <style>
         body { 
-            margin: 0;           /* 移除網頁邊框空白 */
-            padding: 0;          /* 移除內部填充空白 */
-            font-family: "Arial Black", Gadget, sans-serif; /* 使用極粗字體 */
+            margin: 0;           /* 移除網頁邊距 */
+            padding: 0;          /* 移除內容內縮 */
+            font-family: "Arial Black", Gadget, sans-serif; /* 使用最粗的字體 */
             color: #0abab5;      /* 設定文字顏色為蒂芬妮藍綠色 */
-            line-height: 1.0;    /* 將行高設為最小(1.0)，讓文字緊湊排列 */
+            line-height: 1.0;    /* 壓縮行高，讓文字更緊湊 */
+            
+            /* 置中關鍵設定：使用 Flex 佈局讓內容垂直排列並水平置中 */
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            text-align: center;
         }
         
         #logo { 
-            height: 80px;        /* Logo 的高度 */
-            width: auto;         /* 寬度依比例自動調整 */
-            margin-bottom: 0px;  /* 將圖片下方的間距設為 0 */
-            display: block;      /* 確保圖片獨佔一行 */
+            height: 80px;        /* Logo 顯示高度 */
+            width: auto;         /* 寬度依比例縮放 */
+            margin-bottom: 0px;  /* 圖片下方的間距設為最小 */
+            display: block;      /* 讓圖片獨立占據一行 */
         }
         
         .text-style {
-            /* 白色描邊設定：4px 厚度，確保在深色背景也清晰 */
+            /* 白色描邊：4px 寬度，確保在深色背景下文字清晰 */
             -webkit-text-stroke: 4px white; 
-            /* 關鍵：先畫邊框再填色，防止字體被邊框吃掉變細 */
+            /* 關鍵：先畫描邊再填充顏色，防止字體被邊框吃掉變細 */
             paint-order: stroke fill; 
-            display: block;      /* 確保每一段文字都換行 */
-            margin-top: 0px;    /* 使用負數邊距，讓文字與上方更緊貼 */
+            display: block;      /* 確保每一行文字自動換行 */
+            margin-top: 0px;    /* 使用負數邊距，強制讓文字往上貼近 Logo */
+            width: fit-content;  /* 寬度根據內容自動調整，有利於置中 */
         }
         
-        #date { font-size: 16px; }  /* 日期字體大小 */
-        #clock { font-size: 24px; font-variant-numeric: tabular-nums; } /* 時間字體與等寬數字設定 */
+        #date { font-size: 16px; }  /* 日期字體大小設定 */
+        #clock { font-size: 24px; font-variant-numeric: tabular-nums; } /* 時間大小與等寬數字設定 */
     </style>
 </head>
 <body>
@@ -39,21 +46,21 @@
     <div id="clock" class="text-style"></div>
 
     <script>
-        // 補零功能：例如 9月 會變成 09
+        // 數字補零工具函數，例如 3 會變成 "03"
         const pad = n => String(n).padStart(2, '0');
         
-        // 設定星期幾的英文縮寫陣列
+        // 定義星期幾的英文縮寫陣列
         const days = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
         
-        // 每秒執行一次更新功能
+        // 設定每 1000 毫秒 (1秒) 更新一次畫面
         setInterval(() => {
-            const d = new Date(); // 取得現在時間
+            const d = new Date(); // 取得目前的系統時間
             
             // 組合日期格式：2026/03/09 Mon.
             const dateStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${days[d.getDay()]}`;
             document.getElementById('date').innerText = dateStr;
             
-            // 取得 24 小時制時間：18:15:45
+            // 取得 24 小時制的即時時間
             document.getElementById('clock').innerText = d.toLocaleTimeString('zh-TW', {hour12:false});
         }, 1000);
     </script>
