@@ -21,7 +21,7 @@
             padding: 5px;
         }
         #logo {
-            height: 45px; /* 您可依需求微調 Logo 高度 */
+            height: 50px; /* 您可依需求微調 Logo 高度 */
             width: auto;
             margin-bottom: 8px; /* 圖片與文字間的間距 */
         }
@@ -32,10 +32,10 @@
             line-height: 1.2;
         }
         #date {
-            font-size: 18px; /* 日期字級 */
+            font-size: 12px; /* 日期字級 */
         }
         #clock {
-            font-size: 28px; /* 時間字級 */
+            font-size: 18px; /* 時間字級 */
             font-variant-numeric: tabular-nums; /* 讓數字寬度一致不跳動 */
         }
     </style>
@@ -51,7 +51,7 @@
         function updateClock() {
             const now = new Date();
             
-            // 格式化日期：年-月-日
+            // 格式化日期：年/月/日
             const y = now.getFullYear();
             const mo = String(now.getMonth() + 1).padStart(2, '0');
             const d = String(now.getDate()).padStart(2, '0');
