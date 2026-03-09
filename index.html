@@ -42,7 +42,7 @@
 </head>
 <body>
     <div class="info-container">
-        <img id="logo" src="logo.png"> 
+        <img id="logo" src="my_logo.png"> 
         <div id="date" class="time-text">0000-00-00</div>
         <div id="clock" class="time-text">00:00:00</div>
     </div>
@@ -55,7 +55,7 @@
             const y = now.getFullYear();
             const mo = String(now.getMonth() + 1).padStart(2, '0');
             const d = String(now.getDate()).padStart(2, '0');
-            document.getElementById('date').innerText = `${y}-${mo}-${d}`;
+            document.getElementById('date').innerText = `${y}/${mo}/${d}`;
 
             // 格式化時間：24小時制
             const h = String(now.getHours()).padStart(2, '0');
