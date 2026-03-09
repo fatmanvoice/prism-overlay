@@ -1,39 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html style="background:transparent;overflow:hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            background: transparent; /* 確保背景透明 */
-            margin: 0;
-            padding: 10px;
-            display: flex;
-            flex-direction: column; /* 改為垂直排列 */
-            align-items: flex-start; /* 靠左對齊 */
-            font-family: sans-serif;
-            overflow: hidden;
-        }
-        .info-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 5px;
-        }
-        #logo {
-            height: 50px; /* 您可依需求微調 Logo 高度 */
-            width: auto;
-            margin-bottom: 8px; /* 圖片與文字間的間距 */
-        }
-        .time-text {
-            color: #0abab5; /* 您喜愛的蒂芬妮藍綠色 */
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* 確保在亮背景下清晰 */
-            line-height: 1.2;
-        }
-        #date {
-            font-size: 12px; /* 日期字級 */
-        }
+        body { margin: 0; padding: 5px; font-family: sans-serif; color: #0abab5; font-weight: 900; -webkit-text-stroke: 1px white; line-height: 1.1; }
+        #logo { height: 35px; margin-bottom: 4px; display: block; }
+        #date { font-size: 13px; }
+        #clock { font-size: 19px; font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body>
+    <img id="logo" src="my_logo.png">
+    <div id="date"></div>
+    <div id="clock"></div>
+
+    <script>
+        const pad = n => String(n).padStart(2, '0');
+        const days = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
+        setInterval(() => {
+            const d = new Date();
+            const dateStr = `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${days[d.getDay()]}`;
+            document.getElementById('date').innerText = dateStr;
+            document.getElementById('clock').innerText = d.toLocaleTimeString('zh-TW', {hour12:false});
+        }, 1000);
+    </script>
+</body>
+</html>
         #clock {
             font-size: 18px; /* 時間字級 */
             font-variant-numeric: tabular-nums; /* 讓數字寬度一致不跳動 */
